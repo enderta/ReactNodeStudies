@@ -10,6 +10,7 @@ const secret = "secret";
 
 app.use(cors());
 app.use(express.json());
+
 pool = new Pool({
     user: "postgres",
     host: "localhost",
