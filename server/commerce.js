@@ -442,6 +442,314 @@ app.post("/users/:id/orders", async (req, res) => {
     });
 });
 
+app.put("/users/:id/orders/:order_id", async (req, res) => {
+    const {total, order_date, user_id, order_items} = req.body;
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.id === parseInt(req.params.id)) {
+                const {rows} = await pool.query(
+                    "UPDATE orders SET total=$1,order_date=$2,user_id=$3 WHERE id=$4 RETURNING *",
+                    [total, order_date, user_id, req.params.order_id]
+                );
+                await pool.query("DELETE FROM order_items WHERE order_id=$1", [req.params.order_id]);
+                order_items.forEach(async (order_item) => {
+                    await pool.query(
+                        "INSERT INTO order_items (order_id,product_id,quantity,price) VALUES ($1,$2,$3,$4)",
+                        [req.params.order_id, order_item.product_id, order_item.quantity, order_item.price]
+                    );
+                });
+                res.status(200).json({
+                    status: "success",
+                    message: "order updated",
+                    data: rows,
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.delete("/users/:id/orders/:order_id", async (req, res) => {
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.id === parseInt(req.params.id)) {
+                await pool.query("DELETE FROM order_items WHERE order_id=$1", [req.params.order_id]);
+                await pool.query("DELETE FROM orders WHERE id=$1", [req.params.order_id]);
+                res.status(200).json({
+                    status: "success",
+                    message: "order deleted",
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.get("/products", async (req, res) => {
+    const search= req.query.search||"";
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 10;
+    const offset = (page - 1) * limit;
+    const {rows} = await pool.query(
+        "SELECT * FROM products WHERE name ILIKE $1 OR description ILIKE $2 LIMIT $3 OFFSET $4",
+        [`%${search}%`, `%${search}%`, limit, offset]
+    );
+    res.status(200).json({
+        status: "success",
+        message: `${rows.length} products found`,
+        data: rows,
+        pagination: {
+            page: page,
+            total: rows.length,
+        }
+
+    });
+});
+
+app.get("/products/:id", async (req, res) => {
+    const {rows} = await pool.query("SELECT * FROM products WHERE id=$1", [req.params.id]);
+    if (rows.length === 0) {
+        res.status(404).json({
+            status: "error",
+            message: "product not found",
+        });
+    } else {
+        res.status(200).json({
+            status: "success",
+            message: "product found",
+            data: rows,
+        });
+    }
+
+});
+
+app.post("/products", async (req, res) => {
+    //only admin can create product
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.role === "admin") {
+                const {name, description, price, image_url} = req.body;
+                const {rows} = await pool.query(
+                    "INSERT INTO products (name,description,price,image_url) VALUES ($1,$2,$3,$4) RETURNING *",
+                    [name, description, price, image_url]
+                );
+                res.status(200).json({
+                    status: "success",
+                    message: "product created",
+                    data: rows,
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.put("/products/:id", async (req, res) => {
+    //only admin can update product
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.role === "admin") {
+                const {name, description, price, image_url} = req.body;
+                const {rows} = await pool.query(
+                    "UPDATE products SET name=$1,description=$2,price=$3,image_url=$4 WHERE id=$5 RETURNING *",
+                    [name, description, price, image_url, req.params.id]
+                );
+                res.status(200).json({
+                    status: "success",
+                    message: "product updated",
+                    data: rows,
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.delete("/products/:id", async (req, res) => {
+    //only admin can delete product
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.role === "admin") {
+                await pool.query("DELETE FROM products WHERE id=$1", [req.params.id]);
+                res.status(200).json({
+                    status: "success",
+                    message: "product deleted",
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.get("/categories", async (req, res) => {
+    const {rows} = await pool.query("SELECT * FROM categories");
+    res.status(200).json({
+        status: "success",
+        message: `${rows.length} categories found`,
+        data: rows,
+    });
+});
+
+app.get("/categories/:id", async (req, res) => {
+    const {rows} = await pool.query("SELECT * FROM categories WHERE id=$1", [req.params.id]);
+    if (rows.length === 0) {
+        res.status(404).json({
+            status: "error",
+            message: "category not found",
+        });
+    } else {
+        res.status(200).json({
+            status: "success",
+            message: "category found",
+            data: rows,
+        });
+    }
+});
+
+app.post("/categories", async (req, res) => {
+    //only admin can create category
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.role === "admin") {
+                const {name} = req.body;
+                const {rows} = await pool.query(
+                    "INSERT INTO categories (name) VALUES ($1) RETURNING *",
+                    [name]
+                );
+                res.status(200).json({
+                    status: "success",
+                    message: "category created",
+                    data: rows,
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.put("/categories/:id", async (req, res) => {
+    //only admin can update category
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.role === "admin") {
+                const {name} = req.body;
+                const {rows} = await pool.query(
+                    "UPDATE categories SET name=$1 WHERE id=$2 RETURNING *",
+                    [name, req.params.id]
+                );
+                res.status(200).json({
+                    status: "success",
+                    message: "category updated",
+                    data: rows,
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.delete("/categories/:id", async (req, res) => {
+    //only admin can delete category
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.role === "admin") {
+                await pool.query("DELETE FROM categories WHERE id=$1", [req.params.id]);
+                res.status(200).json({
+                    status: "success",
+                    message: "category deleted",
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.get("/orders", async (req, res) => {
+    //only admin can get all orders
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.role === "admin") {
+                const {rows} = await pool.query("SELECT * FROM orders");
+                res.status(200).json({
+                    status: "success",
+                    message: `${rows.length} orders found`,
+                    data: rows,
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.put("/orders/:id", async (req, res) => {
+    //admin and user can update order
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.role === "admin" || decoded.user.id === req.params.id) {
+                const {status} = req.body;
+                const {rows} = await pool.query(
+                    "UPDATE orders SET status=$1 WHERE id=$2 RETURNING *",
+                    [status, req.params.id]
+                );
+                res.status(200).json({
+                    status: "success",
+                    message: "order updated",
+                    data: rows,
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
+
+app.delete("/orders/:id", async (req, res) => {
+    //only admin can delete order
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (decoded.user.role === "admin") {
+                await pool.query("DELETE FROM orders WHERE id=$1", [req.params.id]);
+                res.status(200).json({
+                    status: "success",
+                    message: "order deleted",
+                });
+            } else {
+                res.status(401).json({error: "Unauthorized"});
+            }
+        }
+    });
+});
 
 app.listen(3001, () => {
         console.log("Server is listening on port 3001");
