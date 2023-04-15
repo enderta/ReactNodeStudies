@@ -61,7 +61,7 @@ const Register = () => {
         <div>
             <div>
                 <div>
-                    <h1 style={{ color: "goldenrod", textAlign: "center" }}>Login</h1>
+                    <h1 style={{ color: "goldenrod", textAlign: "center" }}>Register</h1>
                 </div>
 
                 <div className="container">
