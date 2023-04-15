@@ -86,10 +86,14 @@ const Edit = (props) => {
             <Navbar/>
             {
                 loading  ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> :(
+
                     <div className="container">
+                        <div>
+                            <h1 style={{color: "goldenrod", textAlign: "center"}}>Edit post</h1>
+                        </div>
                         <div className="row">
                             <div className="col-md-12">
-                                <h1>Edit Post</h1>
+
                                 <form onSubmit={handleUpdate}>
                                     <div className="form-group">
                                         <label htmlFor="title">Title</label>

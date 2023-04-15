@@ -57,14 +57,15 @@ const Read = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <h5 style={{color: "goldenrod", textAlign: "center"}}>Post</h5>
+                        <h1 style={{color: "goldenrod", textAlign: "center"}}>Post</h1>
                         {loading ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : (
                             <div>
-                                <div className="card" style={{width: "18rem"}}>
-                                    <div className="card-body">
+                                <div >
+                                    <div >
                                         <h5 className="card-title">{post.blog_post.title}</h5>
-                                        <h6 className="card-subtitle mb-2 text-muted">{post.blog_post.author}</h6>
+
                                         <p className="card-text">{post.blog_post.content}</p>
+                                        <h6 className="card-subtitle mb-2 text-muted">{post.blog_post.author}</h6>
                                         {
                                             (localStorage.getItem("is_admin") === "true") ? (
                                                     <div>
