@@ -86,14 +86,16 @@ const Read = () => {
                                         <div style={{ whiteSpace: "pre-wrap" , wordWrap: "break-word", wordBreak: "break-word" }}>
                                             {post.content}
                                         </div>
-                                        <h6 className="card-subtitle mb-2 text-muted">{post.author}</h6>
-
+                                        <br/>
+                                        <div>
+                                            <h6 className="card-subtitle mb-2 text-muted">{post.author}</h6>
+                                        </div>
+                                        <br/>
                                     </div>
                                     <img className={"card-img-top"} src={post.image_url} style={{height:"400px",width:"600px"}} alt="Card image cap"/>
 
                                 </div>
                             </div>
-                        )}
                 </div>
             </div>
             </div>
