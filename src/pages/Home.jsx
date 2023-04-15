@@ -43,6 +43,9 @@ function Home() {
                                             <div className="card-body">
                                                 <h6 className="card-title mb-2 text-muted">Title: {post.title}</h6>
                                                 <h6 className="card-subtitle mb-2 text-muted">Author: {post.author}</h6>
+                                                <p>
+                                                    {post.content.length > 100 ? post.content.substring(0, 100) + "..." : post.content}
+                                                </p>
                                                 <Single id={post.id}/>
                                             </div>
                                         </div>
