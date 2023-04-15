@@ -341,9 +341,10 @@ app.get("/blog/:id", async (req, res) => {
                      res.status(200).json({
                           status: "success",
                           message: "Blog post",
-                          data: {
-                            blog_post: rows[0],
-                          },
+                            data: {
+                                rows
+                            }
+
                      });
                 } catch (err) {
                      console.error(err.message);

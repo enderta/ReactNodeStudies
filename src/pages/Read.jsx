@@ -22,7 +22,7 @@ const Read = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    setPost(data.data);
+                    setPost(data.data.rows[0]);
                     setLoading(false);
                 })
                 .catch((err) => console.log(err));
@@ -57,15 +57,13 @@ const Read = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <h1 style={{color: "goldenrod", textAlign: "center"}}>Post</h1>
+                        <h1 style={{color: "goldenrod", textAlign: "center"}}>{post.title}</h1>
                         {loading ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : (
                             <div>
                                 <div >
                                     <div >
-                                        <h5 className="card-title">{post.blog_post.title}</h5>
-
-                                        <p className="card-text">{post.blog_post.content}</p>
-                                        <h6 className="card-subtitle mb-2 text-muted">{post.blog_post.author}</h6>
+                                        <p className="card-text">{post.content}</p>
+                                        <h6 className="card-subtitle mb-2 text-muted">{post.author}</h6>
                                         {
                                             (localStorage.getItem("is_admin") === "true") ? (
                                                     <div>

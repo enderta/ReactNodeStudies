@@ -41,8 +41,8 @@ function Home() {
                                     <div className="col-md-4">
                                         <div className="card" style={{width: "18rem"}}>
                                             <div className="card-body">
-                                                <h5 className="card-title">{post.title}</h5>
-                                                <h6 className="card-subtitle mb-2 text-muted">{post.author}</h6>
+                                                <h6 className="card-title mb-2 text-muted">Title: {post.title}</h6>
+                                                <h6 className="card-subtitle mb-2 text-muted">Author: {post.author}</h6>
                                                 <Single id={post.id}/>
                                             </div>
                                         </div>

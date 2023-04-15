@@ -28,6 +28,7 @@ const App = () => {
                 <Route path={"/edit/:postId"} element={<Edit/>}/>
             </Routes>
 
+
         </div>
     );
 };

@@ -14,11 +14,10 @@ const NavigationBar = () => {
     return (
         <div>
             {localStorage.getItem("is_admin")==="true" ? (
-                <Navbar bg="light" expand="md">
-
+                <Navbar bg="dark" variant="dark" expand="lg">
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
+                        <Nav className="me-auto">
                             <Nav.Item>
                                 <NavLink exact to="/home" className="nav-link">
                                     Home
@@ -38,17 +37,16 @@ const NavigationBar = () => {
                     </Navbar.Collapse>
                 </Navbar>
             ) : (
-                <Navbar bg="light" expand="md">
+                <Navbar bg="dark" variant="dark" expand="lg">
 
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
+                        <Nav className="me-auto">
                             <Nav.Item>
                                 <NavLink exact to="/home" className="nav-link">
                                     Home
                                 </NavLink>
                             </Nav.Item>
-
                             <Nav.Item>
                                 <NavLink to="/logout" className="nav-link" onClick={logout}>
                                     Logout
