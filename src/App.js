@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Logout from "./components/Logout";
 import Read from "./pages/Read";
+import Edit from "./pages/Edit";
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
                 <Route path={"/write"} element={<Write/>}/>
                 <Route path={"/post/:postId"} element={<Read/>}/>
                 <Route path="/logout" element={<Logout/>}/>
+                <Route path={"/edit/:postId"} element={<Edit/>}/>
             </Routes>
 
         </div>

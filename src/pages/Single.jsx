@@ -12,7 +12,7 @@ function Single(props) {
 
   return (
     <div>
-        {loading ? <h1>Loading...</h1> : (
+        {loading ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : (
             <div>
                 <Button onClick={handleClick}>Read more</Button>
             </div>

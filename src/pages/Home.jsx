@@ -35,7 +35,7 @@ function Home() {
                 <div className="row">
                     <div className="col-md-12">
                         <h1 style={{color: "goldenrod", textAlign: "center"}}>Posts</h1>
-                        {loading ? <h1>Loading...</h1> : (
+                        {loading ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : (
                             <div className="row">
                                 {posts.map((post) => (
                                     <div className="col-md-4">

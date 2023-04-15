@@ -58,7 +58,7 @@ const Read = () => {
                 <div className="row">
                     <div className="col-md-12">
                         <h5 style={{color: "goldenrod", textAlign: "center"}}>Post</h5>
-                        {loading ? <h1>Loading...</h1> : (
+                        {loading ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : (
                             <div>
                                 <div className="card" style={{width: "18rem"}}>
                                     <div className="card-body">
@@ -78,7 +78,6 @@ const Read = () => {
                                     </div>
                                 </div>
                             </div>
-
                         )}
                 </div>
             </div>
