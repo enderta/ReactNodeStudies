@@ -100,18 +100,20 @@ const Register = () => {
                                 </Form.Group>
 
                                 <Button
-                                    variant="primary"
+                                    variant="outline-success"
+                                    style={{ margin: "10px" }}
                                     type="submit"
                                     onClick={handleSubmit}
                                 >
-                                    Submit
+                                    Register
                                 </Button>
                                 <Button
-                                    variant="primary"
+                                    variant="outline-success"
+                                    style={{ margin: "10px" }}
                                     type="submit"
                                     onClick={handleBack}
                                 >
-                                    Back
+                                    Login
                                 </Button>
                             </Form>
                         </div>
