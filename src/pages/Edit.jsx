@@ -11,6 +11,7 @@ const Edit = (props) => {
     const [title, setTitle] = React.useState("");
     const [content, setContent] = React.useState("");
     const [author, setAuthor] = React.useState("");
+    const [image_url, setImage_url] = React.useState("");
     const [post, setPost] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
 
@@ -30,6 +31,7 @@ const Edit = (props) => {
                     setAuthor(data.data.rows[0].author);
                     setTitle(data.data.rows[0].title);
                     setContent(data.data.rows[0].content);
+                    setImage_url(data.data.rows[0].image_url);
                     setLoading(false);
                 })
                 .catch((err) => console.log(err));
@@ -52,6 +54,7 @@ const Edit = (props) => {
                 title: title,
                 content: content,
                 author: author,
+                image_url: image_url
 
             })
         })
@@ -82,6 +85,10 @@ const Edit = (props) => {
         e.preventDefault();
         setAuthor(e.target.value);
     }
+    const handleImage_url = (e) => {
+        e.preventDefault();
+        setImage_url(e.target.value);
+    }
 
 
     return (
@@ -109,6 +116,11 @@ const Edit = (props) => {
                                                 <label htmlFor="author">Author</label>
                                                 <input type="text" className="form-control" value={author} id="author"
                                                        onChange={handleAuthor}/>
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="image_url">Image url</label>
+                                                <input type="text" className="form-control" value={image_url} id="image_url"
+                                                         onChange={handleImage_url}/>
                                             </div>
                                         </div>
                                     </div>

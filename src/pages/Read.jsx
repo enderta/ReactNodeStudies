@@ -65,21 +65,27 @@ const Read = () => {
                             <div>
                                 <div >
                                     <div >
-                                        <p className="card-text">{post.content}</p>
+                                        <div style={{ whiteSpace: "pre-wrap" , wordWrap: "break-word", wordBreak: "break-word" }}>
+                                            {post.content}
+                                        </div>
                                         <h6 className="card-subtitle mb-2 text-muted">{post.author}</h6>
+
+                                    </div>
+                                    <img className={"card-img-top"} src={post.image_url} style={{height:"400px",width:"600px"}} alt="Card image cap"/>
+                                    <div>
                                         {
                                             (localStorage.getItem("is_admin") === "true") ? (
                                                 <div className="d-flex justify-content-end">
-                                                        <Button style={{margin:"1px"}} variant={"outline-danger"}  onClick={handleDelete}>
-                                                            <FontAwesomeIcon icon={faTrashAlt} />
-                                                        </Button>
-                                                        <Button variant={"outline-info"}  onClick={handleEdit}>
-                                                            <FontAwesomeIcon icon={faEdit} />
-                                                        </Button>
-                                                    </div>
-                                                ) : (
-                                                    <div></div>
-                                                )
+                                                    <Button style={{margin:"1px"}} variant={"outline-danger"}  onClick={handleDelete}>
+                                                        <FontAwesomeIcon icon={faTrashAlt} />
+                                                    </Button>
+                                                    <Button variant={"outline-info"}  onClick={handleEdit}>
+                                                        <FontAwesomeIcon icon={faEdit} />
+                                                    </Button>
+                                                </div>
+                                            ) : (
+                                                <div></div>
+                                            )
                                         }
                                     </div>
                                 </div>

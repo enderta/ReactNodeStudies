@@ -40,6 +40,7 @@ function Home() {
                                 {posts.map((post) => (
                                     <div className="col-md-4">
                                         <div className="card" style={{width: "18rem"}}>
+                                            <img className={"card-img-top"} src={post.image_url}  alt="Card image cap"/>
                                             <div className="card-body">
                                                 <h6 className="card-title mb-2 text-muted">Title: {post.title}</h6>
                                                 <h6 className="card-subtitle mb-2 text-muted">Author: {post.author}</h6>

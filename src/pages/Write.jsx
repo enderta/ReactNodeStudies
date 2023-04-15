@@ -8,6 +8,7 @@ function Write() {
     const [title, setTitle] = React.useState("");
     const [content, setContent] = React.useState("");
     const [author, setAuthor] = React.useState("");
+   const [image_url, setImage_url] = React.useState("");
     const [loading, setLoading] = React.useState(false);
 
     const handleSubmit = (e) => {
@@ -25,6 +26,7 @@ function Write() {
                 title: title,
                 content: content,
                 author: author,
+                image_url: image_url
             })
         })
             .then(res => res.json())
@@ -55,6 +57,11 @@ function Write() {
         setAuthor(e.target.value);
     }
 
+    const handleImage_url = (e) => {
+        e.preventDefault();
+        setImage_url(e.target.value);
+    }
+
 
     return (
         <div>
@@ -76,6 +83,12 @@ function Write() {
                                         <input type="text" className="form-control" id="author"
                                                onChange={handleAuthor}/>
                                     </div>
+                                    <div className="form-group">
+                                        <label htmlFor="image_url">Image url</label>
+                                        <input type="text" className="form-control" id="image_url"
+                                                  onChange={handleImage_url}/>
+                                    </div>
+
                                 </div>
                             </div>
                             <br/>
