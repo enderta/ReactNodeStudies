@@ -1,29 +1,65 @@
-import React from 'react';
-import {NavLink} from "react-router-dom";
+import React from "react";
+import { Nav, Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const NavigationBar = () => {
+    const logout = () => {
+        localStorage.clear();
+        localStorage.removeItem("token");
+        localStorage.removeItem("name");
+        localStorage.removeItem("email");
+        window.location.href = "/login";
+    };
+
     return (
         <div>
-         <nav>
-             <nav>
-                 <ul>
-                     <li>
-                         <NavLink exact to="/">Home</NavLink>
-                     </li>
-                     <li>
-                         <NavLink to="/write">Write</NavLink>
-                     </li>
-                     <li>
-                         <NavLink to="/register">Register</NavLink>
-                     </li>
-                     <li>
-                         <NavLink to="/login">Login</NavLink>
-                     </li>
-                 </ul>
-             </nav>
-         </nav>
+            {localStorage.getItem("is_admin")==="true" ? (
+                <Navbar bg="light" expand="md">
+
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Item>
+                                <NavLink exact to="/home" className="nav-link">
+                                    Home
+                                </NavLink>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <NavLink to="/write" className="nav-link">
+                                    Write
+                                </NavLink>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <NavLink to="/logout" className="nav-link" onClick={logout}>
+                                    Logout
+                                </NavLink>
+                            </Nav.Item>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            ) : (
+                <Navbar bg="light" expand="md">
+
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Item>
+                                <NavLink exact to="/home" className="nav-link">
+                                    Home
+                                </NavLink>
+                            </Nav.Item>
+
+                            <Nav.Item>
+                                <NavLink to="/logout" className="nav-link" onClick={logout}>
+                                    Logout
+                                </NavLink>
+                            </Nav.Item>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            )}
         </div>
     );
 };
 
-export default Navbar;
+export default NavigationBar;
