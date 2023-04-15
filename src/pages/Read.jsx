@@ -70,10 +70,10 @@ const Read = () => {
                                         {
                                             (localStorage.getItem("is_admin") === "true") ? (
                                                 <div className="d-flex justify-content-end">
-                                                        <Button style={{margin:"1px"}} variant={"danger"}  onClick={handleDelete}>
+                                                        <Button style={{margin:"1px"}} variant={"outline-danger"}  onClick={handleDelete}>
                                                             <FontAwesomeIcon icon={faTrashAlt} />
                                                         </Button>
-                                                        <Button variant={"success"}  onClick={handleEdit}>
+                                                        <Button variant={"outline-info"}  onClick={handleEdit}>
                                                             <FontAwesomeIcon icon={faEdit} />
                                                         </Button>
                                                     </div>
