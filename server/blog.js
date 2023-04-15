@@ -60,6 +60,8 @@ app.post(
                 data: {
                     email,
                     password,
+                    username,
+                    is_admin,
                 },
             });
         } catch (err) {
