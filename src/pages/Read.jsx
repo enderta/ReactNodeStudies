@@ -63,6 +63,24 @@ const Read = () => {
                         <h1 style={{color: "goldenrod", textAlign: "center"}}>{post.title}</h1>
                         {loading ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : (
                             <div>
+                                {
+                                    (localStorage.getItem("is_admin") === "true") ? (
+                                        <div className="d-flex justify-content-end">
+                                            <Button style={{margin:"1px"}} variant={"outline-danger"}  onClick={handleDelete}>
+                                                <FontAwesomeIcon icon={faTrashAlt} />
+                                            </Button>
+                                            <Button variant={"outline-info"}  onClick={handleEdit}>
+                                                <FontAwesomeIcon icon={faEdit} />
+                                            </Button>
+                                        </div>
+                                    ) : (
+                                        <div></div>
+                                    )
+                                }
+                            </div>
+                        )}
+                        <br/>
+                            <div>
                                 <div >
                                     <div >
                                         <div style={{ whiteSpace: "pre-wrap" , wordWrap: "break-word", wordBreak: "break-word" }}>
@@ -72,22 +90,7 @@ const Read = () => {
 
                                     </div>
                                     <img className={"card-img-top"} src={post.image_url} style={{height:"400px",width:"600px"}} alt="Card image cap"/>
-                                    <div>
-                                        {
-                                            (localStorage.getItem("is_admin") === "true") ? (
-                                                <div className="d-flex justify-content-end">
-                                                    <Button style={{margin:"1px"}} variant={"outline-danger"}  onClick={handleDelete}>
-                                                        <FontAwesomeIcon icon={faTrashAlt} />
-                                                    </Button>
-                                                    <Button variant={"outline-info"}  onClick={handleEdit}>
-                                                        <FontAwesomeIcon icon={faEdit} />
-                                                    </Button>
-                                                </div>
-                                            ) : (
-                                                <div></div>
-                                            )
-                                        }
-                                    </div>
+
                                 </div>
                             </div>
                         )}
