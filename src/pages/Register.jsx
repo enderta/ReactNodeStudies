@@ -39,8 +39,8 @@ const Register = () => {
         .then(data => {
             if (data.message === "User created") {
                 window.location.href = "/login";
-            } else if (data.errors[0].msg=== "Invalid credentials") {
-                alert("Invalid credentials");
+            } else if (data.errors[0].msg=== "User already exists") {
+                alert("User already exists");
             } else {
                 alert("Fill in all fields");
             }
@@ -48,14 +48,11 @@ const Register = () => {
         .catch((err) => console.log(err));
     };
 
-
-
-
-
     const handleBack = (e) => {
         e.preventDefault();
         window.location.href = "/";
     };
+    console.log()
 
     return (
         <div>
