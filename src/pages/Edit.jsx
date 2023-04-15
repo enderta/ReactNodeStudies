@@ -84,31 +84,35 @@ const Edit = (props) => {
     return (
         <div>
             <Navbar/>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <h1>Edit Post</h1>
-                        <form onSubmit={handleUpdate}>
-                            <div className="form-group">
-                                <label htmlFor="title">Title</label>
-                                <input type="text" className="form-control" id="title" value={title}  onChange={handleTitle}/>
-                                <div className="form-group">
-                                    <label htmlFor="content">Content</label>
-                                    <textarea className="form-control" id="content" value={content} rows="3"
-                                              onChange={handleContent}></textarea>
+            {
+                loading  ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> :(
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <h1>Edit Post</h1>
+                                <form onSubmit={handleUpdate}>
                                     <div className="form-group">
-                                        <label htmlFor="author">Author</label>
-                                        <input type="text" className="form-control" value={author} id="author"
-                                               onChange={handleAuthor}/>
+                                        <label htmlFor="title">Title</label>
+                                        <input type="text" className="form-control" id="title" value={title}  onChange={handleTitle}/>
+                                        <div className="form-group">
+                                            <label htmlFor="content">Content</label>
+                                            <textarea className="form-control" id="content" value={content} rows="3"
+                                                      onChange={handleContent}></textarea>
+                                            <div className="form-group">
+                                                <label htmlFor="author">Author</label>
+                                                <input type="text" className="form-control" value={author} id="author"
+                                                       onChange={handleAuthor}/>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                </form>
                             </div>
-                            <button type="submit" className="btn btn-primary">Submit</button>
-                        </form>
-
+                        </div>
                     </div>
-                </div>
-            </div>
+                )
+            }
+
         </div>
     );
 };
