@@ -1,6 +1,9 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
 import {Form} from "react-bootstrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
+import Button from "react-bootstrap/Button";
 
 const Edit = (props) => {
     //get id from url
@@ -23,15 +26,15 @@ const Edit = (props) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    setPost(data.data);
-                    setTitle(data.data.blog_post.title);
-                    setContent(data.data.blog_post.content);
-                    setAuthor(data.data.blog_post.author);
+                    setPost(data.data.rows[0]);
+                    setAuthor(data.data.rows[0].author);
+                    setTitle(data.data.rows[0].title);
+                    setContent(data.data.rows[0].content);
                     setLoading(false);
                 })
                 .catch((err) => console.log(err));
         }
-        , []);
+        , [])
     console.log(post)
     //use put endpoint to update the post
     const handleUpdate = (e) => {
@@ -109,7 +112,10 @@ const Edit = (props) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                    <br/>
+                                    <Button type="submit" variant={"outline-warning"}>
+                                        <FontAwesomeIcon  icon={faPaperPlane}/>
+                                    </Button>
                                 </form>
                             </div>
                         </div>

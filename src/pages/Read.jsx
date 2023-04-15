@@ -1,5 +1,8 @@
 import React from 'react';
 import Navbar from "../components/Navbar";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import Button from "react-bootstrap/Button";
 
 const Read = () => {
     //get the id from the url
@@ -66,9 +69,13 @@ const Read = () => {
                                         <h6 className="card-subtitle mb-2 text-muted">{post.author}</h6>
                                         {
                                             (localStorage.getItem("is_admin") === "true") ? (
-                                                    <div>
-                                                        <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
-                                                        <button className="btn btn-warning" onClick={handleEdit}>Edit</button>
+                                                <div className="d-flex justify-content-end">
+                                                        <Button style={{margin:"1px"}} variant={"danger"}  onClick={handleDelete}>
+                                                            <FontAwesomeIcon icon={faTrashAlt} />
+                                                        </Button>
+                                                        <Button variant={"success"}  onClick={handleEdit}>
+                                                            <FontAwesomeIcon icon={faEdit} />
+                                                        </Button>
                                                     </div>
                                                 ) : (
                                                     <div></div>
