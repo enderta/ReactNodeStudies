@@ -1,5 +1,8 @@
 import React from 'react'
 import Navbar from "../components/Navbar";
+import Button from "react-bootstrap/Button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPaperPlane} from "@fortawesome/free-solid-svg-icons";
 
 function Write() {
     const [title, setTitle] = React.useState("");
@@ -75,7 +78,10 @@ function Write() {
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <br/>
+                            <Button type="submit" variant={"outline-warning"}>
+                                <FontAwesomeIcon  icon={faPaperPlane}/>
+                            </Button>
                         </form>
                         {loading ?  <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : null}
                     </div>
