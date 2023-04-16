@@ -52,6 +52,9 @@ function Home() {
                                                 <p>
                                                     {post.content.length > 100 ? post.content.substring(0, 100) + "..." : post.content}
                                                 </p>
+                                                <h6 className="card-subtitle mb-2 text-muted">
+                                                    Posted: {new Date(post.created_at).toLocaleDateString()}
+                                                </h6>
                                                 <Single id={post.id}/>
                                             </div>
                                         </div>
