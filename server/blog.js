@@ -311,8 +311,9 @@ app.get("/blog", async (req, res) => {
         try {
             if (search) {
                 const {rows} = await pool.query(
-                    "SELECT * FROM blog_posts WHERE title LIKE $1 OR content LIKE $1 ORDER BY created_at DESC",
-                    [`%${search}%`]
+                  //search by title, content, author
+                    "SELECT * FROM blog_posts WHERE title ILIKE $1 OR content ILIKE $2 OR author ILIKE $3 ORDER BY created_at DESC",
+                    [`%${search}%`, `%${search}%`, `%${search}%`]
                 );
                 res.status(200).json({
                     status: "success",
