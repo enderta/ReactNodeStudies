@@ -20,6 +20,11 @@ function Home() {
         })
             .then(res => res.json())
             .then(data => {
+                //sort the posts by date created_at in descending order
+                data.data.rows.sort((a, b) => {
+                    return new Date(b.created_at) - new Date(a.created_at);
+                }
+                )
                 setPosts(data.data.rows);
                 setLoading(false);
             })
