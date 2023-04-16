@@ -69,9 +69,11 @@ function Home() {
 
 
                                             </div>
-                                            <Single id={post.id}/>
+                                            <span style={{margin:"5px"}}>
+                                                <Single id={post.id}/>
+                                            </span>
                                             <br/>
-                                            <h6 className="card-subtitle mb-2 text-muted">
+                                            <h6  className="card-subtitle mb-2 text-muted">
                                                 Posted: {new Date(post.created_at).toLocaleDateString()}
                                             </h6>
                                         </div>
