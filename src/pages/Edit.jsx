@@ -12,6 +12,8 @@ const Edit = (props) => {
     const [content, setContent] = React.useState("");
     const [author, setAuthor] = React.useState("");
     const [image_url, setImage_url] = React.useState("");
+    //create a date object which will be used to update the created_at field as well postgresql will automatically update the updated_at field defualat at the time of update
+    const created_at = new Date().toISOString();
     const [post, setPost] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
 
@@ -54,7 +56,8 @@ const Edit = (props) => {
                 title: title,
                 content: content,
                 author: author,
-                image_url: image_url
+                image_url: image_url,
+                created_at: created_at
 
             })
         })

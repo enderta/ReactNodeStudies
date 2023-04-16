@@ -2,47 +2,61 @@ import React from 'react'
 import Navbar from "../components/Navbar";
 import Single from "./Single";
 import {Link} from "react-router-dom";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function Home() {
     const [posts, setPosts] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [search, setSearch] = React.useState("");
 
-    // Fetch posts from API endpoint blog and use auth token from local storage
+// Fetch posts from API endpoint blog and use auth token from local storage
     React.useEffect(() => {
-        fetch("http://localhost:5000/blog", {
+//search for posts
+        fetch(`http://localhost:5000/blog?search=${search}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: localStorage.getItem("token"),
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+
             }
         })
             .then(res => res.json())
             .then(data => {
-                //sort the posts by date created_at in descending order
-                data.data.rows.sort((a, b) => {
-                    return new Date(b.created_at) - new Date(a.created_at);
-                }
-                )
                 setPosts(data.data.rows);
                 setLoading(false);
-            })
+            }
+            )
             .catch((err) => console.log(err));
-    }, [])
-    console.log(posts)
-    console.log(localStorage)
+    }, [search])
+
     return (
         <div>
-            <Navbar/>
+            <Navbar search={setSearch}/>
+            <div >
+                <FontAwesomeIcon icon={faSearch} color={'goldenRod'} style={{margin:"5px"}} />
+                <input
+                    type="text"
+                    placeholder="Search"
+                    onChange={(e) => {
+                        setSearch(e.target.value);
+
+                    }}
+                />
+            </div>
            {/* // Display all posts on grid cards usin react-bootstrap*/}
             <div className="container">
+
                 <div className="row">
                     <div className="col-md-12">
                         <h1 style={{color: "goldenrod", textAlign: "center"}}>Posts</h1>
                         {loading ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : (
                             <div className="row">
-                                {posts.map((post) => (
+                                {posts.sort(
+                                    (a, b) => new Date(b.created_at).toLocaleDateString() - new Date(a.created_at).toLocaleDateString()
+                                ).map((post) => (
                                     <div className="col-md-4">
                                         <div className="card" style={{width: "18rem"}}>
                                             <img className={"card-img-top"} src={post.image_url}  alt="Card image cap"/>

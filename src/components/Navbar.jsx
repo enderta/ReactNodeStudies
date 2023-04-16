@@ -1,8 +1,10 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
-const NavigationBar = () => {
+const NavigationBar = (props) => {
     const logout = () => {
         localStorage.clear();
         localStorage.removeItem("token");
@@ -18,6 +20,7 @@ const NavigationBar = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
+                            //search bar
                             <Nav.Item>
                                 <NavLink exact to="/home" className="nav-link">
                                     Home
