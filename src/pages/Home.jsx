@@ -58,7 +58,7 @@ function Home() {
                                     (a, b) => new Date(b.created_at).toLocaleDateString() - new Date(a.created_at).toLocaleDateString()
                                 ).map((post) => (
                                     <div className="col-md-4">
-                                        <div className="card" style={{width: "18rem"}}>
+                                        <div className="card" style={{height: "30rem",width: "18rem"}}>
                                             <img className={"card-img-top"} src={post.image_url}  alt="Card image cap"/>
                                             <div className="card-body">
                                                 <h6 className="card-title mb-2 text-muted">Title: {post.title}</h6>
@@ -66,12 +66,16 @@ function Home() {
                                                 <p>
                                                     {post.content.length > 100 ? post.content.substring(0, 100) + "..." : post.content}
                                                 </p>
-                                                <h6 className="card-subtitle mb-2 text-muted">
-                                                    Posted: {new Date(post.created_at).toLocaleDateString()}
-                                                </h6>
-                                                <Single id={post.id}/>
+
+
                                             </div>
+                                            <Single id={post.id}/>
+                                            <br/>
+                                            <h6 className="card-subtitle mb-2 text-muted">
+                                                Posted: {new Date(post.created_at).toLocaleDateString()}
+                                            </h6>
                                         </div>
+
                                     </div>
                                 ))}
                             </div>
