@@ -276,7 +276,7 @@ app.post(
                 try {
                     const {rows} = await pool.query(
                         //image_url
-                        "insert into blog (title,content,author,image_url) values ($1,$2,$3,$4) RETURNING *",
+                        "insert into blog_posts (title,content,author,image_url) values ($1,$2,$3,$4) RETURNING *",
                         [title, content, author, image_url]
                     );
                     res.status(201).json({
@@ -317,7 +317,7 @@ app.get("/blog", async (req, res) => {
                 );
                 res.status(200).json({
                     status: "success",
-                    message: "Blog posts",
+                    message: `${rows.length} blog posts found for search term: ${search}`,
                     data: {
                         rows
                     }
@@ -328,7 +328,7 @@ app.get("/blog", async (req, res) => {
                 );
                 res.status(200).json({
                     status: "success",
-                    message: "Blog posts",
+                    message: `${rows.length} blog posts`,
                     data: {
                         rows
                     }

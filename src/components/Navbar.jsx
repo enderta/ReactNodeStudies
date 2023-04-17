@@ -1,10 +1,9 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
-const NavigationBar = (props) => {
+
+const NavigationBar = () => {
     const logout = () => {
         localStorage.clear();
         localStorage.removeItem("token");
