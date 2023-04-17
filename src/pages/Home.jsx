@@ -54,11 +54,9 @@ function Home() {
                         <h1 style={{color: "goldenrod", textAlign: "center"}}>Posts</h1>
                         {loading ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : (
                             <div className="row">
-                                {posts.sort(
-                                    (a, b) => new Date(b.created_at).toLocaleDateString() - new Date(a.created_at).toLocaleDateString()
-                                ).map((post) => (
+                                {posts.map((post) => (
                                     <div className="col-md-4">
-                                        <div className="card" style={{height: "30rem",width: "18rem"}}>
+                                        <div className="card" style={{height: "30rem",width: "18rem", margin:"5px"}}>
                                             <img className={"card-img-top"} src={post.image_url}  alt="Card image cap"/>
                                             <div className="card-body">
                                                 <h6 className="card-title mb-2 text-muted">Title: {post.title}</h6>
