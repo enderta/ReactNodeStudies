@@ -385,8 +385,8 @@ app.put("/blog/:id", async (req, res) => {
         }
         try {
             const {rows} = await pool.query(
-                "UPDATE blog_posts SET  title = $1, content = $2, author=$3, created_at = NOW() WHERE id = $4 RETURNING *",
-                [req.body.title, req.body.content, req.body.author, req.params.id]
+                "UPDATE blog_posts SET  title = $1, content = $2, author=$3, image_url=$4, created_at = NOW() WHERE id = $5 RETURNING *",
+                [req.body.title, req.body.content, req.body.author, req.body.image_url, req.params.id]
             );
             if (rows.length === 0) {
                 return res.status(404).json({
