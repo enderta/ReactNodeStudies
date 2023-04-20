@@ -35,3 +35,17 @@ Authorization: {{token}}
 
 %}
 
+###
+
+// get user by id endpoint
+
+GET http://localhost:5000/users/1
+content-type: application/json
+Authorization: {{token}}
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "response status is " + response.status);
+
+    });
+    %}
