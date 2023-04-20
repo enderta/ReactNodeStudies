@@ -25,3 +25,13 @@ Content-Type: application/json
 GET http://localhost:5000/users
 Content-Type: application/json
 Authorization: {{token}}
+
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "response status is " + response.status);
+
+    });
+
+%}
+
