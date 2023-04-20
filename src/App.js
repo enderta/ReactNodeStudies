@@ -1,22 +1,16 @@
 import React from 'react';
-import {Outlet, Route, Routes} from "react-router-dom";
-
-import Single from "./pages/Single";
+import {Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Write from "./pages/Write";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
 import Logout from "./components/Logout";
 import Read from "./pages/Read";
 import Edit from "./pages/Edit";
 
-
 const App = () => {
     return (
         <div>
-
             <Routes>
                 <Route path={"/"} element={<Login/>}/>
                 <Route path={"/register"} element={<Register/>}/>
@@ -27,8 +21,6 @@ const App = () => {
                 <Route path="/logout" element={<Logout/>}/>
                 <Route path={"/edit/:postId"} element={<Edit/>}/>
             </Routes>
-
-
         </div>
     );
 };

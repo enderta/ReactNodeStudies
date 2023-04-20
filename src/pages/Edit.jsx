@@ -97,48 +97,53 @@ const Edit = (props) => {
     return (
         <div>
             <Navbar/>
-            {
-                loading  ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> :(
+            <div>
+                {localStorage.getItem("role")!=="admin" ? window.location.href = "/home" :
 
-                    <div className="container">
-                        <div>
-                            <h1 style={{color: "goldenrod", textAlign: "center"}}>Edit post</h1>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-12">
+                        loading  ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> :(
 
-                                <form onSubmit={handleUpdate}>
-                                    <div className="form-group">
-                                        <label htmlFor="title">Title</label>
-                                        <input type="text" className="form-control" id="title" value={title}  onChange={handleTitle}/>
-                                        <div className="form-group">
-                                            <label htmlFor="content">Content</label>
-                                            <textarea className="form-control" id="content" value={content} rows="3"
-                                                      onChange={handleContent}></textarea>
+                            <div className="container">
+                                <div>
+                                    <h1 style={{color: "goldenrod", textAlign: "center"}}>Edit post</h1>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-12">
+
+                                        <form onSubmit={handleUpdate}>
                                             <div className="form-group">
-                                                <label htmlFor="author">Author</label>
-                                                <input type="text" className="form-control" value={author} id="author"
-                                                       onChange={handleAuthor}/>
+                                                <label htmlFor="title">Title</label>
+                                                <input type="text" className="form-control" id="title" value={title}  onChange={handleTitle}/>
+                                                <div className="form-group">
+                                                    <label htmlFor="content">Content</label>
+                                                    <textarea className="form-control" id="content" value={content} rows="3"
+                                                              onChange={handleContent}></textarea>
+                                                    <div className="form-group">
+                                                        <label htmlFor="author">Author</label>
+                                                        <input type="text" className="form-control" value={author} id="author"
+                                                               onChange={handleAuthor}/>
+                                                    </div>
+                                                    <div className="form-group">
+                                                        <label htmlFor="image_url">Image url</label>
+                                                        <input type="text" className="form-control" value={image_url} id="image_url"
+                                                               onChange={handleImage_url}/>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="form-group">
-                                                <label htmlFor="image_url">Image url</label>
-                                                <input type="text" className="form-control" value={image_url} id="image_url"
-                                                         onChange={handleImage_url}/>
-                                            </div>
-                                        </div>
+                                            <br/>
+                                            <Button type="submit" variant={"outline-warning"}>
+                                                <FontAwesomeIcon  icon={faPaperPlane}/>
+                                            </Button>
+                                        </form>
                                     </div>
-                                    <br/>
-                                    <Button type="submit" variant={"outline-warning"}>
-                                        <FontAwesomeIcon  icon={faPaperPlane}/>
-                                    </Button>
-                                </form>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                )
-            }
+                        )
+                    }
 
-        </div>
+
+
+                    </div>
+            </div>
     );
 };
 

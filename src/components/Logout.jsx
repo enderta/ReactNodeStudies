@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from "react-bootstrap/Button";
 
 const Logout = () => {
     const logout = () => {
@@ -7,11 +6,12 @@ const Logout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("name");
         localStorage.removeItem("email");
+        localStorage.removeItem("role");
         window.location.href = "/login";
     }
     return (
         <div>
-            <a onClick={logout} ></a>
+            <a onClick={logout}></a>
         </div>
     );
 };

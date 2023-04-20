@@ -64,7 +64,7 @@ const Read = () => {
                         {loading ? <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : (
                             <div>
                                 {
-                                    (localStorage.getItem("is_admin") === "true") ? (
+                                    (localStorage.getItem("role") === "admin") ? (
                                         <div className="d-flex justify-content-end">
                                             <Button style={{margin:"1px"}} variant={"outline-danger"}  onClick={handleDelete}>
                                                 <FontAwesomeIcon icon={faTrashAlt} />

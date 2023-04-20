@@ -1,0 +1,27 @@
+// login endpoint
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "email": "et1@gmail.com",
+  "password": "123456"
+}
+
+> {%
+    client.test("Status code is 200", function () {
+        client.assert(response.status === 200, "response status is " + response.status);
+        var data = JSON.parse(responseBody);
+        var token = data.data.token;
+        //add token to private dev environment
+    client.global.set("token", token)
+    });
+
+   %}
+
+###
+
+// get all users endpoint
+
+GET http://localhost:5000/users
+Content-Type: application/json
+Authorization: {{token}}

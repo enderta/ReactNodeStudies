@@ -1,7 +1,6 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import Logout from "../components/Logout";
 
 
 const Login = () => {
@@ -37,8 +36,7 @@ const Login = () => {
         .then(data => {
             if (data.message === "User logged in") {
                 localStorage.setItem("token", data.data.token);
-                localStorage.setItem("is_admin", data.data.is_admin);
-
+                localStorage.setItem("role", data.data.role);
                 window.location.href = "/home";
             } else if (data.errors[0].msg=== "Invalid credentials") {
                 alert("Invalid credentials");

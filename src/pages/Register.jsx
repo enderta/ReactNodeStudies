@@ -26,7 +26,7 @@ const Register = () => {
             username,
             email,
             password,
-            is_admin: false
+            role: "user"
         }
         fetch("http://localhost:5000/register", {
             method: "POST",

@@ -66,40 +66,45 @@ function Write() {
     return (
         <div>
             <Navbar/>
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <h1 style={{color: "goldenrod", textAlign: "center"}}>Write a post</h1>
-                        <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="title">Title</label>
-                                <input type="text" className="form-control" id="title" onChange={handleTitle}/>
+            {localStorage.getItem("role")!=="admin" ? window.location.href = "/home" :
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h1 style={{color: "goldenrod", textAlign: "center"}}>Write a post</h1>
+                            <form onSubmit={handleSubmit}>
                                 <div className="form-group">
-                                    <label htmlFor="content">Content</label>
-                                    <textarea className="form-control" id="content" rows="3"
-                                              onChange={handleContent}></textarea>
+                                    <label htmlFor="title">Title</label>
+                                    <input type="text" className="form-control" id="title" onChange={handleTitle}/>
                                     <div className="form-group">
-                                        <label htmlFor="author">Author</label>
-                                        <input type="text" className="form-control" id="author"
-                                               onChange={handleAuthor}/>
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="image_url">Image url</label>
-                                        <input type="text" className="form-control" id="image_url"
-                                                  onChange={handleImage_url}/>
-                                    </div>
+                                        <label htmlFor="content">Content</label>
+                                        <textarea className="form-control" id="content" rows="3"
+                                                  onChange={handleContent}></textarea>
+                                        <div className="form-group">
+                                            <label htmlFor="author">Author</label>
+                                            <input type="text" className="form-control" id="author"
+                                                   onChange={handleAuthor}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="image_url">Image url</label>
+                                            <input type="text" className="form-control" id="image_url"
+                                                   onChange={handleImage_url}/>
+                                        </div>
 
+                                    </div>
                                 </div>
-                            </div>
-                            <br/>
-                            <Button type="submit" variant={"outline-warning"}>
-                                <FontAwesomeIcon  icon={faPaperPlane}/>
-                            </Button>
-                        </form>
-                        {loading ?  <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : null}
+                                <br/>
+                                <Button type="submit" variant={"outline-warning"}>
+                                    <FontAwesomeIcon  icon={faPaperPlane}/>
+                                </Button>
+                            </form>
+                            {loading ?  <h5 style={{color: "goldenrod", textAlign: "center"}}>loading...</h5> : null}
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+
+
+
         </div>
     )
 }
