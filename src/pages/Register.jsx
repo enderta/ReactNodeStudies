@@ -101,6 +101,7 @@ const Register = () => {
                                     style={{ margin: "10px" }}
                                     type="submit"
                                     onClick={handleSubmit}
+
                                 >
                                     Register
                                 </Button>

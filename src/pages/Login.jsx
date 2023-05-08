@@ -82,6 +82,8 @@ const Login = () => {
                                 style={{ margin: "10px" }}
                                 type="submit"
                                 onClick={login}
+                                className="btn"
+                                data-testid="login-button"
                             >
                                 Login
                             </Button>
