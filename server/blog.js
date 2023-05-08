@@ -15,10 +15,10 @@ app.use(express.json());
 //try to connect to the database and use try catch to catch any errors
 const pool =
     new Pool({
-        user: "postgres",
-        host: "localhost",
-        database: "blog",
-        password: "ender",
+        user: "cyf_ocs1_user",
+        host: "dpg-cg51abceoogtrlvfttrg-a",
+        database: "cyf_ocs1",
+        password: "5BMhOkdU7J0MlP6RbRhsTW9cwqcICTx9",
         port: 5432,
     });
 

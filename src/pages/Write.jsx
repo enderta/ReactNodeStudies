@@ -14,7 +14,7 @@ function Write() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        fetch("http://localhost:5000/blog", {
+        fetch("https://blogapi-786t.onrender.com/blog", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

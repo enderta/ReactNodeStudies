@@ -28,7 +28,7 @@ const Register = () => {
             password,
             role: "user"
         }
-        fetch("http://localhost:5000/register", {
+        fetch("https://blogapi-786t.onrender.com/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
